@@ -1,0 +1,23 @@
+const { Schema, model} = require('mongoose'); //<- As {} servem para facilitar a importação de dependências.
+
+const DevSchema = new Schema ({ //O Schema nada mais é que uma maneira de definir a estrutura de um objeto. No exemplo é a estrutura de uma tabela no banco de dados
+    name: {
+        type: String,
+        required: true,
+    },
+    user: {
+        type: String,
+        required: true,
+    },
+    bio: String,
+    avatar: {
+        type: String, //o Tipo recebido pelo avatar será String pois ele armazenará apenas uma URL para a imagem do github.
+        required: true,
+    }
+},{
+    timestamps: true, //Esta variável irá criar em cada registro do Schema um createdAt e um updatedAt, que é basicamente um registro para saber quando a variável recebeu o valor pela primeira vez, e quando foi feito a última alteração.
+
+});
+
+
+module.exports = model('Dev', DevSchema); // Isso serve para exportar o modelo criado nesse arquivo, "Dev" será o nome atribuido a ele, DevSchema é o modelo criado. 
