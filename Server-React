@@ -1,0 +1,20 @@
+const express  = require('express'); //<- Chama o módulo de express para ajudar a definir rotas na URL do servidor
+const mongoose = require('mongoose'); //<- Depedência para conversar com o banco de dados não-relacional 
+const routes   = require('./routes'); //<- Importando a variável do outro arquivo. Para referenciar a própria pasta basta colocar o ./ na frente e em seguida o nome do arquivo.
+
+
+const server = express();
+
+mongoose.connect('mongodb+srv://teths:teths@cluster0-eoqbb.mongodb.net/omnistack8?retryWrites=true&w=majority',
+{
+    useNewUrlParser : true //para validar a URL passada acima.
+}
+
+); //Para conectar com o banco de dados.
+
+server.use(express.json()); //<- Para fazer o servidor entender requisições em json
+
+server.use(routes); //<- Utiliza a variável do outro código.
+
+server.listen(3333); //Esta função serve para atrelar essa porta 3333 a URL que chamará o servidor.
+
