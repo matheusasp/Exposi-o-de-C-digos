@@ -1,0 +1,32 @@
+const axios = require('axios'); //<- Dependência que serve para facilitar as requisições.
+const Dev = require('../models/Dev');
+
+
+module.exports = {
+    async store(req, res){ 
+     //   console.log(req.body.username); <- Uma das maneiras para chamar o campo username do body da requisição, porém há outra maneira mais interessante:
+
+     const { username } = req.body; //<- Fará a mesma coisa que o de cima de uma maneira mais intuitiva.
+
+     const userExists = await Dev.findOne({user: username});
+
+     if(userExists){
+         return res.json(userExists);
+     }
+     
+     const response = await axios.get(`https://api.github.com/users/${username}`) //<- await serve para fazer o código continuar apenas quando essa linha retornar uma resposta    
+
+    const { name, bio, avatar_url: avatar } = response.data; //<- Importando os dados do response. O axios sempre retorna seus valores dentro deste "data";
+    
+    const dev = await Dev.create({
+        name,
+        user: username, //O username já estará presente na requisição então basta utilizá-lo aqui também. O restante será necessário importar do response.
+        bio,
+        avatar
+     }) //<- Para armazenar os dados do github no banco de dados.
+     
+        return res.json(dev); 
+
+    }
+
+};
