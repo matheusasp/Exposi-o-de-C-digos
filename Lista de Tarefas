@@ -1,0 +1,54 @@
+<html>
+  <head>
+      
+      <meta charset="utf-8">
+
+      <body>
+
+      <h1>h1>
+
+
+      <input type='text' id='txtTask'>
+      <button id='btn'>Cadastrar tarefa</button>
+      <ul>
+          <li>Estudar Javascript</li>
+          <li>Estudar mobile</li>
+          <li>Jogar rpg</li>
+      </ul>
+
+
+
+    </body>
+      <script>
+         //Criação de uma lista de tarefas que adiciona mais elementos a lista por input 
+          
+          var input = document.getElementById('txtTask');
+          var btn   = document.getElementById('btn');
+          var ul    = document.querySelector('ul');
+          
+          btn.addEventListener('click', addTask);
+          input.addEventListener('keyup', (e)=>{ //Função para permitir que o valor seja inserido apertando enter
+              if (e.keyCode === 13){ //O keyCode serve para obter o número do código da tecla no teclado pelo objeto do evento. No caso, Enter é 13.
+                  addTask();
+              }
+          })
+          
+            function addTask(){
+                var task = '<li>'+input.value+'</li>'
+                ul.innerHTML += task; //innerHTML serve para acessar o documento html através do javascript.
+                input.value = ''; //Para manter o input sempre limpo após pressionar o botão.
+                input.focus(); //focus serve para manter o cursor sempre clicado no input.
+            }
+          
+       
+    </script>
+
+  </head>
+  <body>
+
+
+
+  </body>
+
+
+</html>
