@@ -1,0 +1,19 @@
+const express = require('express');
+const DevController = require('./controllers/DevController'); //<- Importando o controller
+
+
+const routes = express.Router(); //<- Serve para tornar a variável uma variável de rotas.
+
+
+
+
+
+ routes.get('/', (req, res) => {
+    return res.json( {message: `Olá ${req.query.name}`} );
+}); 
+
+
+routes.post('/devs', DevController.store); //<-- Esta função agora irá puxar o método criado no controller e aplicará aqui
+
+
+module.exports = routes //<- Para exportar a variável de rota.
